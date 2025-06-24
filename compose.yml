@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT_BACK}:${PORT_BACK}
+    env_file: .env
+    volumes:
+      - ./database/bookshelf.sqlite:/datbase/bookshelf.sqlite
+
+  front:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT_FRONT}:${PORT_FRONT}
+    env_file: .env
+
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile

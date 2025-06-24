@@ -1,0 +1,11 @@
+FROM node:bullseye-slim
+
+WORKDIR /backend
+
+ENV ENVIRONMENT=dev
+
+COPY package.json .
+
+RUN npm install
+
+CMD [ "node","app.js" ]
