@@ -2,6 +2,7 @@ image: debian:latest
 
 stages:
   - meow
+  - lint
 
 meow-job:
   stage: meow
@@ -10,3 +11,10 @@ meow-job:
     - apt-get install -y cowsay
   script:
     - /usr/games/cowsay "Meoooow"
+
+eslint:
+  stage: lint
+  needs: []
+  image: registry.gitlab.com/pipeline-components/eslint:latest
+  script:
+    - npx eslint bacckend/app.js
