@@ -26,7 +26,6 @@ include:
 
 build:
   stage: build
-  before_script:
-    - docker info
+  image: docker:28.2.2
   script:
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
