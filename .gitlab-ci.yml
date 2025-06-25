@@ -17,4 +17,4 @@ eslint:
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
   script:
-    - npx eslint bacckend/app.js
+    - npx eslint backend/app.js
