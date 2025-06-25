@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists
 
 WORKDIR /backend
 
-COPY . .
+# COPY . .
+COPY backend .
 
 RUN useradd -ms /bin/bash poupou-destructor && chown -R poupou-destructor:poupou-destructor /backend
 

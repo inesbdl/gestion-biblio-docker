@@ -22,4 +22,4 @@ build:
 
   script:
     # - docker version
-    - docker build -f Dockerfile.debian . -t debian_biblio:latest
+    - docker build -f backend/Dockerfile.debian . -t debian_biblio:latest
