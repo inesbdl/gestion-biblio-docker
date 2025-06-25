@@ -9,4 +9,4 @@ meow-job:
     - apt-get update -qq
     - apt-get install -y cowsay
   script:
-    - /usr/games/cowsay "Meooooow"
+    - /usr/games/cowsay "Meoooow"
