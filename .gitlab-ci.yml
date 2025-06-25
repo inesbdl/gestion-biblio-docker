@@ -1,4 +1,6 @@
-image: debian:latest
+# image: debian:latest
+image: docker:28.2.2-cli
+
 
 services:
   - name: docker:28.2.2-dind
