@@ -1,28 +1,16 @@
-# image: debian:latest
 image: docker:28.2.2-cli
-
 
 services:
   - name: docker:28.2.2-dind
     alias: docker
-
 
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
 
 stages:
-  - meow
   - test
   - build
-
-# meow-job:
-#   stage: meow
-#   before_script:
-#     - apt-get update -qq
-#     - apt-get install -y cowsay
-#   script:
-#     - /usr/games/cowsay "Meoooow"
 
 .eslint:
   stage: test
@@ -37,13 +25,6 @@ stages:
 
 build:
   stage: build
-  before_script:
-    - apt-get update -qq
-    - apt-get install -y curl gnupg lsb-release ca-certificates
-    - curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    - apt-get update
-    - apt-get install -y docker-ce-cli
   script:
-    - docker version
+    - docker info
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
