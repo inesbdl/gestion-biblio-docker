@@ -4,17 +4,17 @@ stages:
   - meow
   - lint
 
-meow-job:
-  stage: meow
-  before_script:
-    - apt-get update -qq
-    - apt-get install -y cowsay
-  script:
-    - /usr/games/cowsay "Meoooow"
+# meow-job:
+#   stage: meow
+#   before_script:
+#     - apt-get update -qq
+#     - apt-get install -y cowsay
+#   script:
+#     - /usr/games/cowsay "Meoooow"
 
 eslint:
   stage: lint
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
   script:
-    - npx eslint backend/app.js
+    - npx eslint --fix backend
