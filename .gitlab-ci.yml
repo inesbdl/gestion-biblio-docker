@@ -17,6 +17,9 @@ stages:
 build:
   stage: build
   image: docker:28.2.2-dind
+  services:
+    - docker:24-dind # dind pour docker in docker : parce qu'on va utiliser des commandes `docker` depuis un conteneur !
+
   script:
     # - docker version
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
