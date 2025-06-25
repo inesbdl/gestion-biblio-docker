@@ -90,3 +90,39 @@ window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 
 `docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy --scanners vuln image node:latest`
 Total: 1 (UNKNOWN: 0, LOW: 1, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
+
+## Mesure
+
+`Measure-Command { docker build -f Dockerfile.debian . -t debian:bookworm}`
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 6
+Milliseconds      : 210
+Ticks             : 62102290
+TotalDays         : 7,1877650462963E-05
+TotalHours        : 0,00172506361111111
+TotalMinutes      : 0,103503816666667
+TotalSeconds      : 6,210229
+TotalMilliseconds : 6210,229
+```
+
+`Measure-Command { docker build -f Dockerfile --target prod . -t alpine:3.22.0}`
+
+```
+
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 15
+Milliseconds      : 154
+Ticks             : 151541681
+TotalDays         : 0,00017539546412037
+TotalHours        : 0,00420949113888889
+TotalMinutes      : 0,252569468333333
+TotalSeconds      : 15,1541681
+TotalMilliseconds : 15154,1681
+```
+
