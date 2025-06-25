@@ -1,11 +1,10 @@
-image: docker:28.2.2-cli
+image: docker:latest
 
 services:
-  - name: docker:28.2.2-dind
-    alias: docker
+  - docker:dind
 
 variables:
-  DOCKER_HOST: tcp://docker:2375
+  DOCKER_HOST: tcp://docker:2375/
   DOCKER_TLS_CERTDIR: ""
 
 stages:
@@ -14,7 +13,6 @@ stages:
 
 .eslint:
   stage: test
-  needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
   script:
     - npx eslint --fix backend
