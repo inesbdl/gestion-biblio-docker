@@ -1,7 +1,9 @@
 image: debian:latest
 
 services:
-  - docker:28.2.2-dind
+  - name: docker:28.2.2-dind
+    alias: docker
+
 
 variables:
   DOCKER_HOST: tcp://docker:2375
