@@ -1,29 +1,21 @@
-FROM debian:bookworm AS base
+FROM debian:12.11
 
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /backend
 
-COPY package.json .
+COPY . .
 
-RUN npm install
+RUN useradd -ms /bin/bash poupou-destructor && chown -R poupou-destructor:poupou-destructor /backend
 
-FROM base AS dev
+USER poupou-destructor
 
-# COPY package.json .
+RUN npm install && npm cache clean --force
 
-# RUN npm install
+LABEL org.opencontainers.image.authors="tartines" \
+      org.opencontainers.image.url="https://github.com/inesbdl/gestion-biblio-docker" \
+      borg.opencontainers.image.vendor="TARTINES_:3"
 
 ENV ENVIRONMENT=dev
 
 CMD ["node", "app.js"]
-
-FROM base AS prod
-
-ENV ENVIRONMENT=prod
-
-COPY . .
-
-# RUN npm install
-
-ENTRYPOINT ["node", "app.js"]

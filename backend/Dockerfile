@@ -24,6 +24,6 @@ ENV ENVIRONMENT=prod
 
 COPY . .
 
-# RUN npm install
+RUN npm install
 
 ENTRYPOINT ["node", "app.js"]
