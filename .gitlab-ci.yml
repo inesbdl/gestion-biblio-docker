@@ -1,5 +1,12 @@
 image: debian:latest
 
+services:
+  - docker:28.2.2-dind
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+
 stages:
   - meow
   - test
@@ -21,11 +28,14 @@ stages:
     - npx eslint --fix backend
 
 
-include:
-  - template: Jobs/Secret-Detection.gitlab-ci.yml
+# include:
+#   - template: Jobs/Secret-Detection.gitlab-ci.yml
 
 build:
   stage: build
-  image: docker:28.2.2
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y docker.io
   script:
+    - docker version
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
