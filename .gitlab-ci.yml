@@ -12,8 +12,8 @@ stages:
 #   script:
 #     - /usr/games/cowsay "Meoooow"
 
-test:
-  stage: lint
+eslint:
+  stage: test
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
   script:
