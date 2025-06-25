@@ -3,6 +3,7 @@ image: debian:latest
 stages:
   - meow
   - test
+  - build
 
 # meow-job:
 #   stage: meow
@@ -12,7 +13,7 @@ stages:
 #   script:
 #     - /usr/games/cowsay "Meoooow"
 
-eslint:
+.eslint:
   stage: test
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
@@ -22,3 +23,10 @@ eslint:
 
 include:
   - template: Jobs/Secret-Detection.gitlab-ci.yml
+
+build:
+  stage: build
+  before_script:
+    - docker info
+  script:
+    - docker build -f Dockerfile.debian . -t debian_biblio:latest
