@@ -1,8 +1,13 @@
 image: debian:latest
 
+variables:
+  IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+
 stages:
   # - test
   - build
+  - publish
 
 .eslint:
   stage: test
@@ -21,5 +26,29 @@ build:
     - docker:24-dind # dind pour docker in docker : parce qu'on va utiliser des commandes `docker` depuis un conteneur !
 
   script:
-    # - docker version
-    - docker build -f backend/Dockerfile.debian . -t debian_biblio:latest
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -f backend/Dockerfile.debian . -t $IMAGE_NAME:$IMAGE_TAG
+    - docker save $IMAGE_NAME:$IMAGE_TAG -o image.tar
+  artifacts:
+    paths:
+      - image.tar 
+
+# le stage publish qui push notre image sur le registre Gitlab
+publish:
+  stage: publish
+  image: docker:24
+  services:
+    - docker:24-dind
+  dependencies:
+    - build
+  script:
+    # on s'authentifie auprès du registre Gitlab # on s'authentifie auprès du registre Gitlab
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    # on charge l'image format .tar : elle est dispo car elle a été passée à ce job en artifact
+    - docker load -i image.tar
+    # on push l'image qui contient le hash de commit comme tag (unique à chaque push)
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+    # retag vitefé de l'image avec le tag latest
+    - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+    # on push aussi l'image latest, qui sera mise à jour à chaque push
+    - docker push $IMAGE_NAME:latest
