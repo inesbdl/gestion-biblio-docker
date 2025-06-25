@@ -16,7 +16,7 @@ stages:
 
 build:
   stage: build
-  image: docker:24.0.5-dind
+  image: docker:28.2.2-dind
   script:
     # - docker version
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
