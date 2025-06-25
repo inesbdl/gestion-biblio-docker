@@ -1,12 +1,4 @@
-image: docker:latest
-
-services:
-  - name: docker:28.2.2-dind
-    alias: docker
-
-variables:
-  DOCKER_HOST: tcp://docker:2375
-  DOCKER_TLS_CERTDIR: ""
+image: debian:latest
 
 
 stages:
@@ -25,6 +17,7 @@ stages:
 
 build:
   stage: build
+  image: docker:24.0.5-dind
   script:
-    - docker info
+    - docker version
     - docker build -f Dockerfile.debian . -t debian_biblio:latest
