@@ -12,7 +12,7 @@ stages:
 #   script:
 #     - /usr/games/cowsay "Meoooow"
 
-eslint:
+.eslint:
   stage: lint
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
