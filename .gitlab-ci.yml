@@ -18,3 +18,7 @@ eslint:
   image: registry.gitlab.com/pipeline-components/eslint:latest
   script:
     - npx eslint --fix backend
+
+
+include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
