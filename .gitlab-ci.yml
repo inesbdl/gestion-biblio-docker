@@ -2,7 +2,7 @@ image: debian:latest
 
 stages:
   - meow
-  - lint
+  - test
 
 # meow-job:
 #   stage: meow
@@ -12,7 +12,7 @@ stages:
 #   script:
 #     - /usr/games/cowsay "Meoooow"
 
-.eslint:
+test:
   stage: lint
   needs: []
   image: registry.gitlab.com/pipeline-components/eslint:latest
