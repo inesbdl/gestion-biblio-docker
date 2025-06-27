@@ -1,7 +1,7 @@
 image: debian:latest
 
 variables:
-  IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+  IMAGE_NAME: $CI_REGISTRY_IMAGE/gestion-biblio-debian
   IMAGE_TAG: $CI_COMMIT_SHORT_SHA
 
 stages:
@@ -24,7 +24,6 @@ build:
   image: docker:24
   services:
     - docker:24-dind # dind pour docker in docker : parce qu'on va utiliser des commandes `docker` depuis un conteneur !
-
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -f backend/Dockerfile.debian . -t $IMAGE_NAME:$IMAGE_TAG
