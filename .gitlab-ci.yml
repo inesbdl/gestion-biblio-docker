@@ -70,9 +70,9 @@ deploy:
   script:
     - ssh deploy@4.180.113.32 <<EOF
         cd gestion-biblio || git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio
-        cd gestion-biblio
-        git pull origin main
-        docker compose down || true
-        docker compose pull
-        docker compose -f compose.dev.yml up -d --build
+        \ && cd gestion-biblio
+        \ && git pull origin main
+        \ && docker compose down || true
+        \ && docker compose pull
+       \ && docker compose -f compose.dev.yml up -d --build
       EOF
