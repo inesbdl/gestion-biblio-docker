@@ -1,4 +1,4 @@
-
+TP 3
 # Partie 1
 
 `npx eslint backend/app.js`
@@ -49,7 +49,7 @@ window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 
 ## Ajouter un utilisateur deploy
 
-`sudo addUser deploy`
+`sudo adduser deploy`
 `sudo usermod -aG docker deploy`
 `echo 'deploy ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/deploy`
 `sudo chmod 440 /etc/sudoers.d/deploy`
@@ -81,3 +81,7 @@ User deploy may run the following commands on VM-TP3:
 ## Déploiement manuel
 
 `ssh -i ~/.ssh/gitlab deploy@4.180.113.32 docker run registry.gitlab.com/inesbdl-group/inesbdl-docker-avance/gestion-biblio-debian:latest`
+
+## Déploiement automatique
+
+Le déploiement est mis en place dans le `.gitlab-ci.yml` mais cette erreur `fatal : Could not read from remote repository. Please make sure you have the correct access rights and the repository exists.`
