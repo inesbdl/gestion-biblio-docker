@@ -61,10 +61,12 @@ deploy:
   before_script:
     - apt update && apt install -y openssh-server git
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - cat "$SSH_PRIVATE_KEY" | base64 -d | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ssh-keyscan -H 4.180.113.32 >> ~/.ssh/known_hosts
+    # - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
     - ssh deploy@4.180.113.32
     - cd gestion-biblio || git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
