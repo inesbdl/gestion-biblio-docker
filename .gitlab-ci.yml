@@ -72,6 +72,7 @@ deploy:
       ssh deploy@4.180.113.32 <<'EOF'
         set -e
         if [ ! -d "gestion-biblio" ]; then
+          ssh -vT git@gitlab.com
           git clone git@gitlab.com:inesbdl-group/inesbdl-docker-avance.git gestion-biblio
         fi
         cd gestion-biblio
