@@ -68,15 +68,15 @@ deploy:
     - ssh-keyscan -H 4.180.113.32 >> ~/.ssh/known_hosts
 
   script:
-    - ssh deploy@4.180.113.32 <<'EOF'
-      set -e
-      if [ ! -d "gestion-biblio" ]; then
-        git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio
-      fi
-      cd gestion-biblio
-      git pull origin main
-      docker compose down || true
-      docker compose pull
-      docker compose -f compose.dev.yml up -d --build
+    - >
+      ssh deploy@4.180.113.32 <<'EOF'
+        set -e
+        if [ ! -d "gestion-biblio" ]; then
+          git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio
+        fi
+        cd gestion-biblio
+        git pull origin main
+        docker compose down || true
+        docker compose pull
+        docker compose -f compose.dev.yml up -d --build
       EOF
-
