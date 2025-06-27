@@ -8,6 +8,7 @@ stages:
   # - test
   - build
   - publish
+  - deploy
 
 .eslint:
   stage: test
@@ -51,3 +52,15 @@ publish:
     - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
     # on push aussi l'image latest, qui sera mise à jour à chaque push
     - docker push $IMAGE_NAME:latest
+
+
+
+deploy : 
+  stage: deploy
+  script : 
+    - ssh -o StrictHostKeyChecking=no deploy@4.180.113.32 '
+      git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
+      git pull origin main
+      docker compose down  true
+      docker compose pull
+      docker compose up -d --build'

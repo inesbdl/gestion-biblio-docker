@@ -1,11 +1,11 @@
 services:
   api:
-    image: api
+    image: registry.gitlab.com/inesbdl-group/inesbdl-docker-avance/gestion-biblio-debian:631aa079
     build:
       context: ./backend
       # dockerfile: Dockerfile.dev
       # dockerfile: Dockerfile
-      dockerfile: Dockerfile.debian
+      # dockerfile: Dockerfile.debian
       target: dev
     ports:
       - ${PORT_BACK}:${PORT_BACK}
