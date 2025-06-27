@@ -58,6 +58,7 @@ publish:
 deploy : 
   stage: deploy
   script : 
+    - apt install openssh-server
     - ssh -o StrictHostKeyChecking=no deploy@4.180.113.32 '
       git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
       git pull origin main
