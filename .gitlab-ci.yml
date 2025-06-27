@@ -66,10 +66,10 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -H 4.180.113.32 >> ~/.ssh/known_hosts
   script:
-    - ssh deploy@4.180.113.32 <<EOF
-        cd gestion-biblio || git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
-        git pull origin main
-        docker compose down || true
-        docker compose pull
-        docker compose up -d --build
-      EOF
+    - ssh deploy@4.180.113.32
+    - cd gestion-biblio || git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
+    - git pull origin main
+    - docker compose down || true
+    - docker compose pull
+    - docker compose up -d --build
+    
