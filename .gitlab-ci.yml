@@ -59,7 +59,7 @@ deploy:
   stage: deploy
   image: debian:latest
   before_script:
-    - apt update && apt install -y openssh-client git
+    - apt update && apt install -y openssh-server git
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -71,5 +71,5 @@ deploy:
     - git pull origin main
     - docker compose down || true
     - docker compose pull
-    - docker compose up -d --build
+    - docker compose -f compose.dev.yml up -d --build
     
