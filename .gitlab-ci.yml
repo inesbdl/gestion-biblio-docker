@@ -60,8 +60,8 @@ deploy :
   script : 
     - apt update && apt install -y openssh-server
     - ssh -i ~/.ssh/gitlab deploy@4.180.113.32 
-      git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
-      git pull origin main
-      docker compose down  true
-      docker compose pull
-      docker compose up -d --build'
+    - git clone https://gitlab.com/inesbdl-group/inesbdl-docker-avance.git gestion-biblio && cd gestion-biblio
+    - git pull origin main
+    - docker compose down  true
+    - docker compose pull
+    - docker compose up -d --build
